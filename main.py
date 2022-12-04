@@ -32,7 +32,12 @@ def get_data():
     members.clear()
     df = pd.read_json(json_data)
     for k,v in enumerate(df.members):
-        members.append(Member(v['name'], v['stars'], v['local_score'], v['completion_day_level']))
+        if 'name' in v and v['name']:
+            members.append(Member(v['name'], v['stars'], v['local_score'], v['completion_day_level']))
+        else:
+            name = "Anonymous User {0}".format(v['id'])
+            members.append(Member(name, v['stars'], v['local_score'], v['completion_day_level']))
+
 
     members.sort(key=lambda h: (h.score, h.name))
     members.reverse()
@@ -115,6 +120,18 @@ async def on_message(message):
             await message.channel.send('Invalid Input. Stats command syntax: $stats {name}')
     if message.content.startswith('$scoreboard'):
         resp = scoreboard()
-        await message.channel.send('```'+resp+'```')
+        resp_split = resp.split('\n')
+        resp_under_char_limit = ""
+        resp_under_char_limit_2 = ""
+        index = 0
+        while (len(resp_under_char_limit + '\n' + resp_split[index]) < 1994) and (index < len(resp_split) - 1):
+            resp_under_char_limit += ('\n' + resp_split[index])
+            index += 1
+        while (len(resp_under_char_limit_2 + '\n' + resp_split[index]) < 1994) and (index < len(resp_split) - 1):
+            resp_under_char_limit_2 += ('\n' + resp_split[index])
+            index += 1
+        await message.channel.send('```'+resp_under_char_limit+'```')
+        await message.channel.send('```'+resp_under_char_limit_2+'```')
+
 
 client.run(token)
