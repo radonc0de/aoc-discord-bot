@@ -1,8 +1,7 @@
 # Advent of Code Discord Bot #
 
 ## Disclaimer ##
-If you're reading this now, I'd like to apologize in advance for what you're about to see. This code is awful. Hopefully next time you're here I'll have it cleaned up. There are probably a million ways to do this better but I was just focused on getting it working before my lunch break ended. 
-
+If you're reading this now, I'd like to apologize in advance for what you're about to see. This code is awful. Hopefully next time you're here, I'll have it cleaned up. There are a million ways to do this better and cleaner but at the time I was just focused on getting it working.
 ## Setup ##
 1. Create an application on the [Discord Developers](https://discord.com/developers/applications) page.
 2. Add a bot, copy the token and save it in this directory in a file called `token.txt`, name your bot, and enable all intents.
